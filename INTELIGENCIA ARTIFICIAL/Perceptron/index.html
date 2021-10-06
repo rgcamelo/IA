@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="Estilos/estilos.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="Resources/morris.min.js"></script>
+    <link rel="stylesheet" href="Resources/morris.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
+
+    <title>Perceptron</title>
+
+</head>
+<body>
+    <header>
+        <h1>  Red neuronal <strong>Perceptron</strong> simple </h1>
+    </header>
+    
+    
+    <div id="configuraciones" class="confi">
+
+        <div class="container" style="display: flex; justify-content: space-between;">
+
+            <div>
+                <br>
+                <button id="btnIniciar" class="btn btn-primary">Iniciar entrenamiento</button>
+                
+            </div>  
+
+            <div id="numIteracion" class="form-group">
+                <span>Numero iteraciones</span>
+                <br>
+                <input type="number" id="num" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <span>Rata aprendizaje</span>
+                <br>
+                <input type="number" id="rat" value="0.01" step="0.01" min="0" max="1" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <span>Error deseado</span>
+                <br>
+                <input type="number" id="errorDes" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <span>Iteracion</span>
+                <br>
+                <span id="iteracion" style="font-size: 24px;color:black">0.00</span>
+            </div>
+
+            <div id="error" class="form-group">
+                <span>Error iteracion</span>
+                <br>
+                <span id="errorIteracion" style="font-size: 24px;color:black">0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div id="principal" class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <h3>Configuracion</h2>
+                <br>
+
+                <div class="upload-btn-wrapper">
+                    <button class="">Seleccionar archivo</button>
+                    <input type="file" name="myfile" id="file-input"/>
+                </div>
+                
+                <div id="numE">
+                    <span>Numero Entradas </span>
+                    <label id="numEntradas" > 0</label>
+                </div>   
+                
+                <div id="numS">
+                        <span>Numero Salidas</span>
+                        <span id="numSalidas" > 0</span>
+                </div>  
+
+                <div id="numP">
+                        <span>Numero patrones</span>
+                        <span id="numPatrones" > 0</span>
+                </div>  
+
+                <div>
+                    <button id="play"></button>
+                </div>
+
+            </div>
+
+            <div class="col-md-3" style="text-align:center;">
+                <h3>Entradas</h2>
+                <br>
+
+                <div>
+                    <img src="Estilos/neurona.png" height="42" width="42">
+                    <input size="4" type="number" id="e1" value="0" style="width : 35px;"></input>
+                </div>
+                <br>
+                <div>
+                    <img src="Estilos/neurona.png" height="42" width="42">
+                    <input size="4" class="" type="number" value="0" id="e2" style="width : 35px;"></input>
+                </div>
+                <br>
+                <br>
+                <div>
+                    <button id="simular" class="btn btn-light"> Simular</button>
+                </div>
+
+            </div>
+
+            <div class="col-md-3" tyle="text-align:center;">
+                <h3>Salidas</h2>     
+                    <br>    
+                <div>
+                    <img src="Estilos/neurona.png" height="42" width="42">
+                    <span size="4" value="0" type="number" id="s1" style="width : 35px;"> 0</span>
+                </div>
+                <br>
+                <div>
+                    <img src="Estilos/neurona.png" height="42" width="42">
+                    <span size="4" value="0" type="number" id="s2" style="width : 35px;"> 0</span>
+                </div>
+                <br>
+                <br>
+                <div>
+                    <div class="upload-btn-wrapper">
+                        <button class="btn btn-info">Cargar red</button>
+                        <input type="file" name="myfile" id="file-input"/>
+                    </div>                </div>
+            </div>
+
+            <div class="col-md-3">
+                <h3>Graficas</h2>
+                <hr>
+                <span>Error Iteracion</span>
+                <div id="graficaError" style="height: 200px;"></div>
+                <hr>
+                <span>Pesos</span>
+                <div id="graficaPesos" style="height: 200px;"></div>
+            </div>
+                
+        </div>
+
+    </div>
+          
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Datos obtenidos</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+        <div id="modal-body" class="modal-body">
+            <span id="entradas"></span>
+            <br>
+            <span id="salidas"></span>     
+            <br>
+            <span id="patrones"></span>                               
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+     <!-- Modal -->
+     <div class="modal fade" id="modalEntrenamiento" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Entrenamiento finalizado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                 </div>
+                <div id="modal-body" class="modal-body">
+                    <span id="msj">El entrenamiento a finalizado satisfactoriamente</span>                            
+                </div>
+                <div class="modal-footer">
+                        <a id="descargar">Guardar Pesos</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+
+    
+    <script src="Js/graficas.js"></script>
+    <script src="Js/principal.js"></script>
+
+</body>
+</html>
